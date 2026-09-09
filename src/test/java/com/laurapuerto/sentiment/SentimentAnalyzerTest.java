@@ -32,4 +32,13 @@ class SentimentAnalyzerTest {
 
         assertEquals(Sentiment.NEGATIVE, result);
     }
+
+    @Test
+    void doesNotMatchSentimentWordsInsideOtherWords() {
+        SentimentAnalyzer analyzer = new SentimentAnalyzer();
+
+        Sentiment result = analyzer.analyze("The badge is blue");
+
+        assertEquals(Sentiment.NEUTRAL, result);
+    }
 }

@@ -33,8 +33,10 @@ public class SentimentAnalyzer {
     }
 
     private boolean containsAny(String text, Set<String> words) {
-        for (String word : words) {
-            if (text.contains(word)) {
+        String[] tokens = text.split("\\W+");
+
+        for (String token : tokens) {
+            if (words.contains(token)) {
                 return true;
             }
         }
