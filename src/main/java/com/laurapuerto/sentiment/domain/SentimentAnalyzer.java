@@ -1,7 +1,10 @@
-package com.laurapuerto.sentiment;
+package com.laurapuerto.sentiment.domain;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class SentimentAnalyzer {
 
     private static final Set<String> POSITIVE_WORDS = Set.of(

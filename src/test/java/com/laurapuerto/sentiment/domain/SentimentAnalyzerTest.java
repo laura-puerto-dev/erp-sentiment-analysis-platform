@@ -1,4 +1,4 @@
-package com.laurapuerto.sentiment;
+package com.laurapuerto.sentiment.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
