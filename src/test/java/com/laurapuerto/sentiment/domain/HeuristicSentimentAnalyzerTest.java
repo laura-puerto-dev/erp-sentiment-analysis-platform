@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class SentimentAnalyzerTest {
+class HeuristicSentimentAnalyzerTest {
 
     @Test
     void returnsNeutralSentiment() {
-        SentimentAnalyzer analyzer = new SentimentAnalyzer();
+        HeuristicSentimentAnalyzer analyzer = new HeuristicSentimentAnalyzer();
 
         Sentiment result = analyzer.analyze("Any customer feedback");
 
@@ -17,7 +17,7 @@ class SentimentAnalyzerTest {
 
     @Test
     void returnsPositiveSentimentForPositiveText() {
-        SentimentAnalyzer analyzer = new SentimentAnalyzer();
+        HeuristicSentimentAnalyzer analyzer = new HeuristicSentimentAnalyzer();
 
         Sentiment result = analyzer.analyze("The product is excellent");
 
@@ -26,7 +26,7 @@ class SentimentAnalyzerTest {
 
     @Test
     void returnsNegativeSentimentForNegativeText() {
-        SentimentAnalyzer analyzer = new SentimentAnalyzer();
+        HeuristicSentimentAnalyzer analyzer = new HeuristicSentimentAnalyzer();
 
         Sentiment result = analyzer.analyze("The product is terrible");
 
@@ -35,7 +35,7 @@ class SentimentAnalyzerTest {
 
     @Test
     void doesNotMatchSentimentWordsInsideOtherWords() {
-        SentimentAnalyzer analyzer = new SentimentAnalyzer();
+        HeuristicSentimentAnalyzer analyzer = new HeuristicSentimentAnalyzer();
 
         Sentiment result = analyzer.analyze("The badge is blue");
 
