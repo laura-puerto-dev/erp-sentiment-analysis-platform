@@ -1,4 +1,7 @@
 package com.laurapuerto.sentiment.api;
 
-public record SentimentRequest(String text) {
+import jakarta.validation.constraints.NotBlank;
+
+public record SentimentRequest(
+        @NotBlank String text) {
 }

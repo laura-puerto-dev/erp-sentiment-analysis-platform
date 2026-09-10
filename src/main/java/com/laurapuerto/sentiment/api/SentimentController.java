@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.laurapuerto.sentiment.domain.Sentiment;
 import com.laurapuerto.sentiment.domain.SentimentAnalyzer;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/sentiment")
 public class SentimentController {
@@ -19,7 +21,7 @@ public class SentimentController {
     }
 
     @PostMapping
-    public SentimentResponse analyze(@RequestBody SentimentRequest request) {
+    public SentimentResponse analyze(@Valid @RequestBody SentimentRequest request) {
         Sentiment sentiment = sentimentAnalyzer.analyze(request.text());
 
         return new SentimentResponse(sentiment);
