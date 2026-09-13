@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.laurapuerto.sentiment.domain.Sentiment;
 import com.laurapuerto.sentiment.domain.SentimentAnalyzer;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 @Service
 @ConditionalOnProperty(name = "sentiment.analyzer", havingValue = "llm")
 public class LlmSentimentAnalyzer implements SentimentAnalyzer {
@@ -18,6 +20,7 @@ public class LlmSentimentAnalyzer implements SentimentAnalyzer {
     }
 
     @Override
+    @SuppressFBWarnings(value = "VA_FORMAT_STRING_USES_NEWLINE", justification = "Newlines are intentional formatting in the LLM prompt")
     public Sentiment analyze(String text) {
         SentimentResult result = chatClient.prompt()
                 .user("""
@@ -30,6 +33,10 @@ public class LlmSentimentAnalyzer implements SentimentAnalyzer {
                 .entity(
                         SentimentResult.class,
                         spec -> spec.useProviderStructuredOutput());
+
+        if (result == null) {
+            throw new IllegalStateException("LLM returned an empty sentiment response");
+        }
 
         return result.sentiment();
     }
