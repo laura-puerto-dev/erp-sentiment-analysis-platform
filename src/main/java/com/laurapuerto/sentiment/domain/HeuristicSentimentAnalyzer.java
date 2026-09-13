@@ -2,8 +2,10 @@ package com.laurapuerto.sentiment.domain;
 
 import java.util.Set;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
+@ConditionalOnProperty(name = "sentiment.analyzer", havingValue = "heuristic")
 @Service
 public class HeuristicSentimentAnalyzer implements SentimentAnalyzer {
 
