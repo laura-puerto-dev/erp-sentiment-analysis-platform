@@ -1,5 +1,6 @@
 package com.laurapuerto.sentiment.api;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -10,7 +11,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.laurapuerto.sentiment.domain.Sentiment;
+import com.laurapuerto.sentiment.domain.SentimentAnalyzer;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -19,8 +24,14 @@ class SentimentControllerTest {
         @Autowired
         private MockMvc mockMvc;
 
+        @MockitoBean
+        private SentimentAnalyzer sentimentAnalyzer;
+
         @Test
         void analyzesSentimentThroughHttpEndpoint() throws Exception {
+                when(sentimentAnalyzer.analyze("The product is excellent"))
+                                .thenReturn(Sentiment.POSITIVE);
+
                 mockMvc.perform(post("/sentiment")
                                 .contentType("application/json")
                                 .content("""
