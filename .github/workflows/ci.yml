@@ -20,5 +20,5 @@ jobs:
           java-version: "25"
           cache: maven
 
-      - name: Run tests
-        run: ./mvnw test
+      - name: Run quality gate
+        run: ./mvnw verify
